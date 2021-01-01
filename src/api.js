@@ -1,4 +1,5 @@
 const puppeteer = require("puppeteer");
+const readline = require("readline");
 const qrcode = require("qrcode-terminal");
 const { from, merge } = require('rxjs');
 const { take } = require('rxjs/operators');
@@ -153,13 +154,13 @@ async function sendTo(phoneOrContact, message) {
         await page.waitForSelector('#main > footer > div._3SvgF._1mHgA.copyable-area > div.DuUXI > div > div._1awRl.copyable-text.selectable-text', { timeout: 5000 });
         await page.keyboard.press("Enter");
         await page.waitFor(1000);
-        process.stdout.clearLine();
-        process.stdout.cursorTo(0);
+		readline.clearLine();
+		readline.cursorTo(0);
         process.stdout.write(`${phone} Sent\n`);
         counter.success++;
     } catch (err) {
-        process.stdout.clearLine();
-        process.stdout.cursorTo(0);
+		readline.clearLine();
+		readline.cursorTo(0);
         process.stdout.write(`${phone} Failed\n`);
         counter.fails++;
     }
