@@ -27,7 +27,9 @@ async function start({ showBrowser = false, qrCodeData = false, session = true }
         ]
     }
     try {
-        browser = await puppeteer.launch(args);
+        browser = await puppeteer.launch({
+			args: ["--no-sandbox", "--disable-setuid-sandbox"],
+		});
         page = await browser.newPage();
         // prevent dialog blocking page and just accept it(necessary when a message is sent too fast)
         page.on("dialog", async dialog => { await dialog.accept(); });
